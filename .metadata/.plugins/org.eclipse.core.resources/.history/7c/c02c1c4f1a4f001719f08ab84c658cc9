@@ -1,0 +1,40 @@
+package com.songpeng.web;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+public class UploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 0 如果不是文件上传表单， 那么不处理
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			throw new RuntimeException("不是文件上传表单， 请核实！");
+		}
+		
+		// 1 创建工厂
+		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+		// 1.1 设置临时文件保存位置
+		fileItemFactory.setRepository(new File("D:/temp"));
+		// 1.2 默认文件大小超过 10kb 就会产生临时文件，修改文件大小的临界值为 3M
+		// 如果文件大小超过 3M 就会产生临时文件
+		fileItemFactory.setSizeThreshold(1024 * 1024 * 3);
+		// 2 创建解析请求的核心类
+		ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

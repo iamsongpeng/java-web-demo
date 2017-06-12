@@ -1,0 +1,26 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+public class UploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 0 如果不是文件上传表单， 那么不处理
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			throw new RuntimeException("不是文件上传表单， 请核实！");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

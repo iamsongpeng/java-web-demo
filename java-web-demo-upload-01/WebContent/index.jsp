@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>上传文件</h2>
+	<h3><a href="${pageContext.request.contextPath }/simpleUpload.jsp">快速入门</a></h3>
+	<h3><a href="${pageContext.request.contextPath }/manyFilesUpload.jsp">多文件上传</a></h3>
 </body>
 </html>

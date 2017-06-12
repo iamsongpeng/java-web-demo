@@ -1,0 +1,88 @@
+package com.songpeng.web;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.songpeng.utils.UploadUtils;
+
+public class UploadFilesServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 0 如果不是文件上传表单， 那么不处理
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			throw new RuntimeException("不是文件上传表单， 请核实！");
+		}
+		
+		// 1 创建工厂
+		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+		// 1.1 设置临时文件保存位置
+		fileItemFactory.setRepository(new File("D:/temp"));
+		// 1.2 默认文件大小超过 10kb 就会产生临时文件，修改文件大小的临界值为 3M
+		// 如果文件大小超过 3M 就会产生临时文件
+		fileItemFactory.setSizeThreshold(1024 * 1024 * 3);
+		// 2 创建解析请求的核心类
+		ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
+		try {
+			// 3 解析请求，获取表单项集合
+			List<FileItem> fileItemList = fileUpload.parseRequest(request);
+			// 4 遍历 表单项集合
+			for(FileItem fileItem : fileItemList) {
+				if(fileItem.isFormField()) {
+					// 4.1 如果是普通表单项
+					// 4.1.1 获取 name 的属性值
+					String name = fileItem.getFieldName();
+					// 4.1.2 获取用户填写的值
+					String value = fileItem.getString("utf-8");
+					System.out.println("普通表单项：" + name); // 普通表单项：description
+					System.out.println("普通表单项：" + value); // 普通表单项：描述内容
+				} else {
+					// 4.2 如果是文件上传项
+					// 4.2.1 获取上传文件名
+					String filename = fileItem.getName();
+					if(filename.isEmpty()) {
+						throw new RuntimeException("上传文件为空！");
+					}
+					System.out.println("文件上传项 filename = " + filename); // 4.txt
+					// 4.2.2 根据原始文件名生成唯一的文件名
+					String uuidname = UploadUtils.createUUIDName(filename);
+					System.out.println("文件上传项 uuidname = " + uuidname); // 16d1ad41-042d-481c-86f3-876a1fa6ef18.txt
+					// 4.2.3 根据唯一的文件名生成随机的目录
+					String randomPath = UploadUtils.createRandomPath(uuidname);
+					System.out.println("文件上传项 randomPath = " + randomPath); // /5/0
+					// 4.2.4 指定文件上传的目录
+					File path = new File("D:/testUpload" + randomPath);
+					path.mkdirs();
+					System.out.println("文件上传项 path = " + path); // D:\testUpload\5\0
+					// 4.2.3 完成文件上传
+					File file = new File(path, uuidname); 
+					System.out.println("文件上传项 new File(path, uuidname) = " + file); // D:\testUpload\5\0\16d1ad41-042d-481c-86f3-876a1fa6ef18.txt
+					fileItem.write(file);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("上传文件失败！");
+		}
+		response.setContentType("text/html; charset=utf-8");
+		response.getWriter().println("文件已经上传成功，3秒后跳转到首页！");
+		response.setHeader("refresh", "2; url=" + request.getContextPath() + "/index.jsp");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
