@@ -1,0 +1,31 @@
+package com.songpeng.web.filter;
+
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class LifecycleFilter implements Filter {
+
+    public LifecycleFilter() {
+    	System.out.println("执行 LifecycleFilter 的构造方法");
+    }
+    
+	public void destroy() {
+		System.out.println("filter destroy 方法");
+	}
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		chain.doFilter(request, response);
+	}
+
+	public void init(FilterConfig fConfig) throws ServletException {
+		System.out.println("-------------------------------");
+		System.out.println("执行 LifecycleFilter 的初始化方法");
+		System.out.println("初始化参数值：" + fConfig.getInitParameter("encoding"));
+	}
+
+}

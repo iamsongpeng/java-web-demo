@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h2>首页</h2>
+	<h3><a href="${pageContext.request.contextPath }/hello">访问servlet</a></h3>
+	<h3><a href="${pageContext.request.contextPath }/demo01/lifecycle.jsp">测试 Filter 生命周期</a></h3>
+	<h3><a href="${pageContext.request.contextPath }/demo01/encoding.jsp">应用一：统一全站字符编码过滤器</a></h3>
 	<h3><a href="${pageContext.request.contextPath }/demo02/index.jsp">自动登录案例</a></h3>
 </body>
 </html>

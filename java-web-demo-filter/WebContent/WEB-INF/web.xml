@@ -28,4 +28,56 @@
     <filter-name>AutoLoginFilter</filter-name>
     <url-pattern>/demo02/index.jsp</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HelloServlet</display-name>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.songpeng.web.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>HelloFilter</display-name>
+    <filter-name>HelloFilter</filter-name>
+    <filter-class>com.songpeng.web.filter.HelloFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HelloFilter</filter-name>
+    <url-pattern>/hello</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter>
+    <display-name>LifecycleFilter</display-name>
+    <filter-name>LifecycleFilter</filter-name>
+    <filter-class>com.songpeng.web.filter.LifecycleFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>LifecycleFilter</filter-name>
+    <url-pattern>/demo01/lifecycle.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>EncodingFilter</display-name>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.songpeng.web.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EncodingServlet</display-name>
+    <servlet-name>EncodingServlet</servlet-name>
+    <servlet-class>com.songpeng.web.EncodingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EncodingServlet</servlet-name>
+    <url-pattern>/encoding</url-pattern>
+  </servlet-mapping>
 </web-app>
