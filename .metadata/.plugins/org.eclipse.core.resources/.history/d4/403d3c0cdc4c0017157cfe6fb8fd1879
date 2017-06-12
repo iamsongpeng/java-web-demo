@@ -1,0 +1,7 @@
+package com.songpeng.factory.ext;
+
+import com.songpeng.factory.Operation;
+
+public class OperationAdd extends Operation {
+
+}

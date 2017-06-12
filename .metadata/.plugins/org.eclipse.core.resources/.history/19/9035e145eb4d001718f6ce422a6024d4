@@ -1,0 +1,76 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+public class UploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1 判断 如果不是文件上传表单 抛异常不处理
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			throw new RuntimeException("不是文件上传表单!");
+		}
+		// 6.1 将资源信息 封装javabean中
+		
+		// 2 创建工厂类
+		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+		
+		// 3 创建解析请求的核心类
+		ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+		// 4 解析请求 获得表单项集合
+		try {
+			List<FileItem> list = fileUpload.parseRequest(request);
+			if(list != null) {
+				// 5 遍历表单项集合
+				for (FileItem fileItem : list) {
+					// 5.1 判断 如果是普通表单项
+					if(fileItem.isFormField()) {
+						// 5.1.1 获取name的属性值
+						String fieldName = fileItem.getFieldName();
+						// 5.1.2 获取用户填写的值
+						String fieldValue = fileItem.getString("UTF-8");
+					} else {
+						// 6.2
+						// 5.2 判断 如果是文件上传项
+						// 5.2.1 获取原始的文件名
+						String name = fileItem.getName();
+						System.out.println(name);
+						// 6.3
+						// 5.2.2 根据原始文件名生成唯一文件名
+						// 6.4
+						// 5.2.3 根据唯一文件名 生成随机目录
+						// 6.5
+						// 5.2.4 将文件上传到指定位置
+						// 6 将资源信息保存到数据库中
+						
+					}
+					// System.out.println(resource);
+					// 7 给浏览器响应内容
+					
+				}
+				
+				
+				
+			}
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

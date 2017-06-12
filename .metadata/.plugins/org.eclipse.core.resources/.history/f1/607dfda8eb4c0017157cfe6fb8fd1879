@@ -1,0 +1,7 @@
+package com.songpeng.domain;
+
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class User implements HttpSessionBindingListener {
+
+}

@@ -1,0 +1,59 @@
+/**
+ * 
+ */
+
+// 根据 id 获取标签对象
+function $(_id) {
+	return document.getElementById(_id);
+}
+
+// 获取 xmlhttprequest
+function getXMLHttpRequest() {
+	var xmlhttp;
+	
+	if(window.XMLHttpRequest) {
+		// ie7 及以上版本和其他浏览器
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		// ie7 以下
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+	}
+	
+	return xmlhttp;
+}
+
+// 模拟 jQuery 封装 AJAX 操作
+function ajax(jsonObj) {
+	// 默认类型为 post
+	jsonObj.type = jsonObj.type || "POST";
+	
+	// 默认是异步
+	jsonObj.async = jsonObj.async || true;
+	
+	// 1 创建对象
+	var xmlhttp = getXMLHttpRequest();
+	// 2 打开连接, 发送请求
+	if(jsonObj.type.toUpperCase() == "GET") {
+		// 2.1 如果是 GET 请求
+		xmlhttp.open("GET", jsonObj.url, jsonObj.async);
+		xmlhttp.send();
+	} else {
+		// 2.2 如果是 POST 请求
+		xmlhttp.open("POST", jsonObj.url, jsonObj.async);
+		// 告诉浏览器这是一个表单请求
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	}
+	
+	// 3 处理响应
+}
+
+
+
+
+
+
+
+
+
+
+

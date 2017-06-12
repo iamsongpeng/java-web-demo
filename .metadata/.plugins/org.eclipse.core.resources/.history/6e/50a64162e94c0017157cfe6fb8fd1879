@@ -1,0 +1,22 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class OnlineCountHttpSessionListener implements HttpSessionListener {
+	
+    public void sessionCreated(HttpSessionEvent se)  { 
+    	// 获得原来在线人数
+    	int onlineCount = (int) se.getSession().getServletContext().getAttribute("onlineCount");
+    	se.getSession().getServletContext().setAttribute("onlineCount", onlineCount + 1);
+    	System.out.println("onlineCount: " + onlineCount);
+    }
+
+    public void sessionDestroyed(HttpSessionEvent se)  { 
+    	// 获得原来在线人数
+    	int onlineCount = (int) se.getSession().getServletContext().getAttribute("onlineCount");
+    	se.getSession().getServletContext().setAttribute("onlineCount", onlineCount - 1);
+    	System.out.println("onlineCount: " + onlineCount);
+    }
+	
+}

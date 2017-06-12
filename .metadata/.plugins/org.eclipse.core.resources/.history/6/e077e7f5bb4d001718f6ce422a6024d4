@@ -1,0 +1,10 @@
+package com.songpeng.utils;
+
+/*
+ * 文件上传工具类
+ */
+public class UploadUtils {
+	/*
+	 * 根据唯一文件名, 生成随机目录
+	 */
+}

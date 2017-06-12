@@ -1,0 +1,32 @@
+/**
+ * 
+ */
+
+function loadarea(pid, area) {
+	// 创建对象
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	// 发送请求
+	xmlhttp.open("GET", "regiest?pid=" + pid, true);
+	xmlhttp.send();
+
+	// 处理响应
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var areaJSON = JSON.parse(xmlhttp.responseText);
+			for (var i = 0; i < areaJSON.length; i++) {
+				// console.log(areaJSON[i].id);
+				$(area).innerHTML += "<option id=" + areaJSON[i].id
+						+ " value='" + areaJSON[i].id + "'>" + areaJSON[i].name
+						+ "</option>";
+			}
+		}
+	}
+}

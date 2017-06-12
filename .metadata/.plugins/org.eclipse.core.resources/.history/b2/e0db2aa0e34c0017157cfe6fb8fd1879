@@ -1,0 +1,20 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class MyServletRequestListener implements ServletRequestListener {
+
+    public MyServletRequestListener() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+         // TODO Auto-generated method stub
+    }
+
+    public void requestInitialized(ServletRequestEvent sre)  { 
+         // TODO Auto-generated method stub
+    }
+	
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="273" key="DIALOG_WIDTH"/>
+		<item value="118" key="DIALOG_Y_ORIGIN"/>
+		<item value="422" key="DIALOG_X_ORIGIN"/>
+		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLTemplatePreferencePage$HTMLEditTemplateDialog_dialogBounds">
+		<item value="660" key="DIALOG_WIDTH"/>
+		<item value="67" key="DIALOG_Y_ORIGIN"/>
+		<item value="446" key="DIALOG_HEIGHT"/>
+		<item value="28" key="DIALOG_X_ORIGIN"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="uploadtime" key="selection"/>
+		<list key="findhistory">
+			<item value="unloadtime"/>
+			<item value="property"/>
+			<item value="customers"/>
+			<item value="value"/>
+			<item value="jsptagDemo"/>
+			<item value="&lt;/a&gt;&lt;/h3&gt;"/>
+			<item value="user1"/>
+			<item value="小图片"/>
+		</list>
+		<list key="replacehistory">
+			<item value="uploadtime"/>
+			<item value="var"/>
+			<item value="customerList"/>
+			<item value="type"/>
+			<item value="jspTagDemo"/>
+			<item value="&lt;/a&gt;&lt;/li&gt;"/>
+			<item value="user"/>
+			<item value="亡命驾驶"/>
+		</list>
+	</section>
+	<section name="org.eclipse.jst.jsp.ui.internal.preferences.ui.JSPTemplatePreferencePage$JSPEditTemplateDialog_dialogBounds">
+		<item value="617" key="DIALOG_WIDTH"/>
+		<item value="44" key="DIALOG_Y_ORIGIN"/>
+		<item value="361" key="DIALOG_HEIGHT"/>
+		<item value="200" key="DIALOG_X_ORIGIN"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+	</section>
+</section>

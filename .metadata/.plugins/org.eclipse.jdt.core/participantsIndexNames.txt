@@ -1,0 +1,3 @@
+INDEX VERSION 1.126
+D:\software\workspace\JavaWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\289357137.index
+\day08\src

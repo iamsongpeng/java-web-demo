@@ -1,0 +1,16 @@
+package com.songpeng.service.impl;
+
+import com.songpeng.domain.User;
+import com.songpeng.service.UserService;
+
+public class UserServiceImpl implements UserService {
+	
+	@Override
+	public User login(User user) {
+		// 调用数据层方法进行查询
+		UserDao userDao = new UserDaoImpl();
+		
+		return null;
+	}
+
+}

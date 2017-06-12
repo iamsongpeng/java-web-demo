@@ -1,0 +1,11 @@
+package com.songpeng.demo02.service;
+
+public class AccountService {
+
+	public double actualConsumption(double txtPrice, double txtNum, int addRange) {
+		double totalPrices = 0d;
+		
+		return 0;
+	}
+
+}

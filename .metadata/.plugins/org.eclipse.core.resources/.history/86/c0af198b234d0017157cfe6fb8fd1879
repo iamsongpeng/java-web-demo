@@ -1,0 +1,11 @@
+package com.songpeng.test;
+
+import com.songpeng.factory.Operation;
+import com.songpeng.factory.OperationFactory;
+
+public class Test01 {
+	public static void main(String[] args) {
+		Operation Oper;
+		oper = OperationFactory.createOperate("+");
+	}
+}

@@ -1,0 +1,17 @@
+package com.songpeng.factory.ext;
+
+import com.songpeng.factory.Operation;
+/*
+ * 减法类, 
+ * 继承运算类
+ */
+public class OperationSub extends Operation {
+
+	@Override
+	public double getResult() {
+		double result = 0;
+		result = super.get_numberA() - super.get_numberB();
+		return 0;
+	}
+
+}

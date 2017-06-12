@@ -1,0 +1,13 @@
+package com.songpeng.factory.ext;
+
+import com.songpeng.factory.Operation;
+
+public class OperationMul extends Operation {
+
+	@Override
+	public double getResult() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

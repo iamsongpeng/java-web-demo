@@ -1,0 +1,14 @@
+package com.songpeng.demo02.service;
+
+public class AccountService {
+
+	public double actualConsumption(double txtPrice, double txtNum, String addRange) {
+		switch(addRange) {
+		case "0":
+			return txtPrice * txtNum;
+			break;
+		}
+		return 0;
+	}
+
+}

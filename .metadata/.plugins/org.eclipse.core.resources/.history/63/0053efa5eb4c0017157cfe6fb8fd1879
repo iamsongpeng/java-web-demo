@@ -1,0 +1,5 @@
+package com.songpeng.domain;
+
+public class User {
+
+}

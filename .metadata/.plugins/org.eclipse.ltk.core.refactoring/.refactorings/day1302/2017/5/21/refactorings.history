@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;WebRoot&apos;&#x0D;&#x0A;- Original project: &apos;day1302&apos;&#x0D;&#x0A;- Destination element: &apos;WebRoot&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     welcome.html&#x0D;&#x0A;     login.html" description="Copy files" element1="WebContent/welcome.html" element2="WebContent/login.html" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1495802573080" target="/day13_my/WebRoot" units="0" version="1.0"/>
+</session>

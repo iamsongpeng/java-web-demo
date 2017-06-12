@@ -1,0 +1,65 @@
+package com.songpeng.web;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import sun.misc.BASE64Encoder;
+
+public class DownloadListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// get 请求, 先编码, 再解码
+		String filepath = request.getParameter("filepath");
+		filepath = new String(filepath.getBytes("iso-8859-1"), "UTF-8");
+		System.out.println(filepath);
+		
+		// 截取得到文件名
+		int index = filepath.lastIndexOf("\\");
+		String filename = filepath.substring(index + 1); 
+		System.out.println(filename);
+		
+		// 2 两头
+		response.setContentType(this.getServletContext().getMimeType(filename));
+		
+		// 2.1 判断浏览器对应处理
+		// 2.1.1 获取 user-agent 请求头
+		String userAgent = request.getHeader("user-agent");
+		if(userAgent.contains("FireFox") || userAgent.contains("Chrome")) {
+			// 火狐和谷歌
+			BASE64Encoder base64Encoder = new BASE64Encoder();
+			filename = "=?utf-8?B?" + base64Encoder.encode(filename.getBytes("UTF-8")) + "?=";
+		} else {
+			// IE 和 其他
+			filename = URLEncoder.encode(filename, "UTF-8");
+			filename = filename.replace("+", " ");
+		}
+		response.setHeader("content-Disposition", "attachment; filename=" + filename);
+		
+		// 两流
+		InputStream in = new BufferedInputStream(new FileInputStream(filepath));
+		OutputStream out = new BufferedOutputStream(response.getOutputStream());
+		int b;
+		while((b = in.read()) != -1) {
+			out.write(b);
+			out.flush();
+		}
+		in.close();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

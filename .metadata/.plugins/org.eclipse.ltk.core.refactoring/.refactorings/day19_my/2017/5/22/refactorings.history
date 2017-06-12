@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;day19_my&apos;&#x0D;&#x0A;- Original project: &apos;day19_my&apos;&#x0D;&#x0A;- Original element: &apos;day19_my/src/com.songpeng.service.impl&apos;" description="Delete element" element1="/src&lt;com.songpeng.service.impl" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1496232959478" subPackages="false" version="1.0"/>
+</session>

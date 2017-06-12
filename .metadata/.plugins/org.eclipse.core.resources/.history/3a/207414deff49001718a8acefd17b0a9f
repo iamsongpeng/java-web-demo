@@ -1,0 +1,31 @@
+## 添加用户案例
+
+### 主要知识点
+
+### 分析
+
+* Dbutils 工具类
+* BeanUtils 工具类
+* layDate 开源的日期控件与时间插件
+
+### 代码
+
+MySQL 数据库准备
+
+```
+create database java_web_demo_customer_add_dbutils;
+
+use java_web_demo_customer_add_dbutils;
+
+create table customer(
+   id int primary key auto_increment,
+   name varchar(20),
+   sex varchar(10),
+   birthday date,
+   phone varchar(20),
+   email varchar(40),
+   hobby varchar(100),
+   type varchar(40),
+   description varchar(255)
+);
+```

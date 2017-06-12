@@ -1,0 +1,68 @@
+package com.songpeng.service.impl;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.songpeng.dao.CustomerDao;
+import com.songpeng.dao.impl.CustomerDaoImpl;
+import com.songpeng.domain.Customer;
+import com.songpeng.service.CustomerService;
+import com.songpeng.utils.JDBCUtils;
+
+public class CustomerServiceImpl implements CustomerService {
+	CustomerDao customerDao = new CustomerDaoImpl();
+	
+	@Override
+	public void saveCustomer(Customer customer) {
+		// 调用 DAO 添加用户信息
+		customerDao.saveCustomer(customer);
+	}
+
+	@Override
+	public List<Customer> findAllCustomers() {
+		// 调用 dao 查询所有的客户信息
+		List<Customer> customers = customerDao.findAll();
+		return customers;
+	}
+
+	@Override
+	public void delCustomerById(String id) {
+		// 调用 dao, 根据编号删除客户信息
+		customerDao.delById(id);
+	}
+
+	@Override
+	public void delBatchCustomer(String[] idArr) {
+		// 批量删除用户信息
+		Connection conn = null;
+		
+		try {
+			// 1. 获得连接
+			conn = JDBCUtils.getConnection();
+			
+			// 2. 开启事务
+			conn.setAutoCommit(false);
+			
+			// 3. 执行一组 sql 语句
+			if(idArr != null) {
+				for(String id : idArr) {
+					// 带事务, 根据编号删除用户信息
+					customerDao.delByIdInTransaction(conn, id);
+				}
+			}
+			
+			// 6. 制造异常进行测试
+			// int j = 1 / 0;
+			
+			// 4.1 如果没有出现异常, 提交事务
+			conn.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			// 4.2 如果出现异常, 回滚事务(指撤销操作)
+			System.out.println("出现异常, 回滚事务!");
+		} finally {
+			
+		}
+	}
+
+}

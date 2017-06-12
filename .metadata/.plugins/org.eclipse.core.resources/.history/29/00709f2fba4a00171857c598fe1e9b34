@@ -1,0 +1,25 @@
+package com.songpeng.test;
+
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.junit.Test;
+
+import com.songpeng.utils.JDBCUtils;
+
+public class DbUtilsUpdate {
+	@Test
+	public void insert() {
+		// 创建对象
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		// sql
+		String sql = "insert into customer values(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+		for (int i = 1; i <= 23; i++) {
+			try {
+				queryRunner.update(sql, "高达"+i , "男", "2017-06-01", "15820161314", "iamsongpeng@qq.com", "高尔夫, 攀岩, 蹦极", "金牌会员", "在路上的编程运动员!");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

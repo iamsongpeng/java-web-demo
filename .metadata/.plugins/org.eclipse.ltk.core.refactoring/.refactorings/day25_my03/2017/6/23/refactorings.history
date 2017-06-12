@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.songpeng.web.FindAllResourceServlet&apos; to &apos;DownloadListServlet&apos;&#x0D;&#x0A;- Original project: &apos;day25_my03&apos;&#x0D;&#x0A;- Original element: &apos;com.songpeng.web.FindAllResourceServlet&apos;&#x0D;&#x0A;- Renamed element: &apos;com.songpeng.web.DownloadListServlet&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;FindAllResourceServlet&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.songpeng.web{FindAllResourceServlet.java[FindAllResourceServlet" matchStrategy="1" name="DownloadListServlet" qualified="false" references="true" similarDeclarations="false" stamp="1497101046986" textual="false" version="1.0"/>
+</session>

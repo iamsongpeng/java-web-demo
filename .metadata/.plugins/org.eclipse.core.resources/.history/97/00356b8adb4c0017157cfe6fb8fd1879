@@ -1,0 +1,6 @@
+package com.songpeng.factory;
+
+public class Operation {
+	private double _numberA = 0;
+	
+}

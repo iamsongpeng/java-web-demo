@@ -1,0 +1,22 @@
+package com.songpeng.factory.ext;
+
+import com.songpeng.factory.Operation;
+/*
+ * 除法类, 
+ * 继承运算类
+ */
+public class OperationDiv extends Operation {
+
+	@Override
+	public double getResult() {
+		double result = 0;
+		try {
+			result = super.get_numberA() / super.get_numberB();
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("除数不能为0!");
+		}
+		return 0;
+	}
+
+}

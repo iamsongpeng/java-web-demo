@@ -1,0 +1,10 @@
+package com.songpeng.domain;
+
+public class Resource {
+	private int id;
+	private String uuidname;
+	private String realname;
+	private String savepath;
+	private Timestamp unloadtime;
+	private String description;
+}

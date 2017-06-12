@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+tomcat7Server.day08.IEARProjectName=
+tomcat7Server.day08.altContextRoot=
+tomcat7Server.day08.contextRoot=/day08
+tomcat7Server.day08.deployIsOverProject=false
+tomcat7Server.day08.deploymentPath=D\:\\software\\JavaWeb\\apache-tomcat-7.0.77\\webapps\\day08
+tomcat7Server.day08.isDeployed=true
+tomcat7Server.day08.isExploded=true
+tomcat7Server.day08.isUptoDate=true
+tomcat7Server.day08.noFileCopy=false
+tomcat7Server.day08.shouldBackup=false
+tomcat7Server.day08.shouldOverwrite=false
+tomcat7Server.day08.type=WebDeployment

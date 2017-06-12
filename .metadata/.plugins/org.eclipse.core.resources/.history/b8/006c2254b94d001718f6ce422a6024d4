@@ -1,0 +1,6 @@
+package com.songpeng.domain;
+
+public class Resource {
+	private int id;
+	
+}

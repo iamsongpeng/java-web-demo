@@ -1,0 +1,21 @@
+package com.songpeng.web.listener;
+
+import java.util.Date;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class MyServletRequestListener implements ServletRequestListener {
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+    	System.out.println("监听到 ServletRequestEvent 已经创建" + new Date().toLocaleString());
+    	System.out.println("通过事件获取 ServletRequestEvent: " + sre.getServletRequest());
+    	System.out.println("----------------------------------------------");
+    }
+
+    public void requestInitialized(ServletRequestEvent sre)  { 
+    	System.out.println("监听到 ServletRequestEvent 已经销毁" + new Date().toLocaleString());
+    	System.out.println("通过事件获取 ServletRequestEvent: " + sre.getServletRequest());
+    	System.out.println("----------------------------------------------");
+    }
+}

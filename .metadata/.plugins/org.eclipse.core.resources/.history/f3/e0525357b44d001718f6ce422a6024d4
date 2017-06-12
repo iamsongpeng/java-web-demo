@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function() {
+	var addAttachment = document.getElementById("addAttachment");
+	var uploaddiv = document.getElementById("uploaddiv");
+	addAttachment.onclick = function() {
+		
+	}
+}
+</script>
+</head>
+<body>
+<form method="post" enctype="multipart-data" action="${pageContext.request.contextPath }/unload2">
+	<input type="button" id="addAttachment" value="添加附件">
+	<div id="uploaddiv">
+		<input type="file" name="upload">
+		<a href="javascript:void(0)" onclick="_delFile()">删除</a>
+	</div>
+	<input type="submit" value="上传文件" >	
+</form>
+</body>
+</html>

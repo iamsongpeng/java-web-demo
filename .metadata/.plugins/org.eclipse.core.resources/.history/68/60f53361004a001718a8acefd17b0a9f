@@ -1,0 +1,17 @@
+package com.songpeng.service.impl;
+
+import com.songpeng.dao.CustomerDao;
+import com.songpeng.dao.impl.CustomerDaoImpl;
+import com.songpeng.domain.Customer;
+import com.songpeng.service.CustomerService;
+
+public class CustomerServiceImpl implements CustomerService {
+
+	@Override
+	public void saveCustomer(Customer customer) {
+		// 调用 DAO 添加用户信息
+		CustomerDao customerDao = new CustomerDaoImpl();
+		customerDao.saveCustomer(customer);
+	}
+
+}

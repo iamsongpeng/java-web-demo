@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.songpeng.utils&apos; to &apos;day16_my/src&apos;&#x0D;&#x0A;- Original project: &apos;day15_my&apos;&#x0D;&#x0A;- Destination element: &apos;day16_my/src&apos;&#x0D;&#x0A;- Original element: &apos;day15_my/src/com.songpeng.utils&apos;" description="Copy package" destination="=day16_my/src" element1="/src&lt;com.songpeng.utils" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1495954992363" version="1.0"/>
+</session>

@@ -1,0 +1,31 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.songpeng.service.CustomerService;
+import com.songpeng.service.impl.CustomerServiceImpl;
+
+public class DelBatchCustomerServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. 获取要删除编号的数组
+		String[] idArr = request.getParameterValues("ids");
+		// 2. 将编号数组传给业务层, 执行批量删除
+		CustomerService customerService = new CustomerServiceImpl();
+		customerService.delBatchCustomer(idArr);
+		// 3. 删除成功, 重新查询所有的客户并且显示在页面上
+		response.setContentType("text/html; charset=UTF-8");
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

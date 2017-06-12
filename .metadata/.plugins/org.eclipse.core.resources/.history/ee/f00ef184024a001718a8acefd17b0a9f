@@ -1,0 +1,66 @@
+## 添加用户案例
+
+### 主要知识点
+
+1. 查询所有客户信息并显示
+2. 单行删除(在每行数据后, 添加删除按钮)
+3. 批量删除(在每行数据前 checkbox 复选框，勾选删除选中的记录)
+4. 修改(先查后改)
+
+
+### 分析
+
+* Dbutils 工具类
+* BeanUtils 工具类
+* layDate 开源的日期控件与时间插件
+
+### 代码
+
+MySQL 数据库准备
+
+```
+create database java_web_demo_customer_add_dbutils;
+
+use java_web_demo_customer_add_dbutils;
+
+create table customer(
+   id int primary key auto_increment,
+   name varchar(20),
+   sex varchar(10),
+   birthday date,
+   phone varchar(20),
+   email varchar(40),
+   hobby varchar(100),
+   type varchar(40),
+   description varchar(255)
+);
+```
+
+通过 Java 程序进行数据的添加
+```
+package com.songpeng.test;
+
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.junit.Test;
+
+import com.songpeng.utils.JDBCUtils;
+
+public class DbUtilsUpdate {
+	@Test
+	public void insert() {
+		// 创建对象
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		// sql
+		String sql = "insert into customer values(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+		for (int i = 1; i <= 23; i++) {
+			try {
+				queryRunner.update(sql, "高达"+i , "男", "2017-06-01", "15820161314", "iamsongpeng@qq.com", "高尔夫, 攀岩, 蹦极", "金牌会员", "在路上的编程运动员!");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+```

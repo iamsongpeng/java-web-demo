@@ -1,0 +1,64 @@
+package com.songpeng.web;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+public class Upload2Servlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1 创建工厂类
+		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+		// 2 创建解析请求的核心类
+		ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+		// 3 解析请求, 返回表单项集合
+		try {
+			List<FileItem> list = fileUpload.parseRequest(request);
+			// 4 遍历
+			for(FileItem fileItem : list) {
+				// 4.1 判断
+				if(fileItem.isFormField()) {
+					// 4.1.1 如果是普通的表单项, 获取 name 的属性和用户填写的值
+					// 获取 name 的属性值
+					String fieldName = fileItem.getFieldName();
+					// 用户填写的值
+					String value = fileItem.getString("UTF-8");
+					System.out.println("普通的表单项: " + fieldName + "=" + value);
+				} else {
+					// 4.1.2 否则就是文件上传项, 获取文件名和把文件写到某个地方
+					// 获取文件名
+					String filename = fileItem.getName();
+					System.out.println("文件名: " + filename);
+					// 把文件写到某个地方
+					String pathname = this.getServletContext().getRealPath("/upload");
+					System.out.println("this.getServletContext().getRealPath()" + pathname);
+					File path = new File(pathname);
+					// 如果没有指定目录, 创建目录
+					path.mkdirs();
+					
+					File file = new File(path, filename);
+					fileItem.write(file);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

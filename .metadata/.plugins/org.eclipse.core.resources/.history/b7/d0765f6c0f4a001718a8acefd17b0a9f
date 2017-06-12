@@ -1,0 +1,19 @@
+package com.songpeng.dao;
+
+import java.util.List;
+
+import com.songpeng.domain.Customer;
+
+/*
+ * 操作 customer 表数据
+ */
+public interface CustomerDao {
+	// 添加用户
+	void saveCustomer(Customer customer);
+
+	List<Customer> findAll();
+	
+	// 根据编号, 删除客户
+	void delById(String id);
+	
+}

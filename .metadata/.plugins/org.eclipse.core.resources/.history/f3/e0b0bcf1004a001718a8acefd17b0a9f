@@ -1,0 +1,42 @@
+package com.songpeng.dao.impl;
+
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.QueryRunner;
+
+import dao.CustomerDao;
+import domain.Customer;
+import utils.JDBCUtils;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	@Override
+	public void saveCustomer(Customer customer) {
+		// 创建执行 sql 的 QueryRunner 对象, 这里不控制事务，需要传递数据源
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource()); // getDataSource() 的作用是获取连接池对象
+		// 书写 sql 语句
+		String sql = "insert into customer values(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] args = {customer.getName(), customer.getSex(), customer.getBirthday(), customer.getPhone(), customer.getEmail(), customer.getHobby(), customer.getType(), customer.getDescription()};
+		// 执行 sql 
+		try {
+			queryRunner.update(sql, args);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("添加用户失败!");
+			/*
+			 * 这是处理没法进一步处理的异常的一般做法。
+			 * try块中出现了一个异常，它被catch住了，
+			 * 我们首先要在标准输出上打印出异常但是如果没有throw这句，
+			 * 这个错误就静悄悄地被catch块吃掉了，程序会继续运行。
+			 * 可这个时候很可能你的程序的状态已经不对了，继续下去也没有什么意义，
+			 * 所以应该继续抛出这个异常。你当然可以写throw e;，
+			 * 但是这个e是一般的异常，如果这样抛出的话，你得在这个函数头上用throws来声明，
+			 * 比如：public void abc() throws Exception然后调用这个函数的函数也还得这么干，
+			 * 所以一般的处理是把e包装成运行时异常：new RuntimeException(e)，这样就不需要在函数头声明了。
+			 * 但这只是一般的处理方法，在实际程序中不可不顾实际情况和需求生搬硬套。
+			*/
+		}
+		
+	}
+
+}

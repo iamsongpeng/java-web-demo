@@ -1,0 +1,12 @@
+package com.songpeng.domain;
+
+import com.sun.jmx.snmp.Timestamp;
+
+public class Resource {
+	private int id;
+	private String uuidname;
+	private String realname;
+	private String savepath;
+	private Timestamp unloadtime;
+	private String description;
+}

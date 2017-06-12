@@ -1,0 +1,17 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class MyServletRequestListener implements ServletRequestListener {
+
+    public MyServletRequestListener() {
+    }
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+    }
+
+    public void requestInitialized(ServletRequestEvent sre)  { 
+    }
+	
+}

@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>省市县三级联动</title>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/conn/conn.js"></script>
+<script type="text/javascript">
+	function loadarea(pid, area) {
+		// 创建对象
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		// 发送请求
+		xmlhttp.open("GET", "regiest?pid=" + pid, true);
+		xmlhttp.send();
+		
+		// 处理响应	
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				//document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+				//console.log(xmlhttp.responseText);
+				var areaJSON = JSON.parse(xmlhttp.responseText);
+				for(var i=0; i<areaJSON.length; i++) {
+					//console.log(areaJSON[i].id);
+					$(area).innerHTML += "<option id=" + areaJSON[i].id + " value='" + areaJSON[i].id + "'>" + areaJSON[i].name + "</option>";
+				}
+			}
+		}
+	}
+	window.onload = function() {
+		$("city").length = 1;
+		$("county").length = 1;
+		loadarea(0, "pro");
+		
+		$("pro").onchange = function() {
+			$("city").length = 1;
+			$("county").length = 1;
+			console.log("this.id=" + this.id)
+			loadarea(this.value, "city");
+		}
+	}
+</script>
+</head>
+<body>
+	<select id="pro" name="pro">
+		<option value="pro">---请选择省---</option>
+	</select>
+	<select id="city" name="city">
+		<option value="city">---请选择市---</option>
+	</select>
+	<select id="county" name="county">
+		<option value="county">---请选择县---</option>
+	</select>
+</body>
+</html>

@@ -1,0 +1,28 @@
+package com.songpeng.domain;
+
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class User implements HttpSessionBindingListener {
+	private String info;
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

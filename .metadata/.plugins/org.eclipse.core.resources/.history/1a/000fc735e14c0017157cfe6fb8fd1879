@@ -1,0 +1,32 @@
+package com.songpeng.web.listener;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class MyServletContextListener implements ServletContextListener {
+
+    public void contextInitialized(ServletContextEvent sce)  { 
+    	System.out.println("监听到 ServletContext 已经创建");
+    	System.out.println("通过事件获取 ServletContext: " + sce.getServletContext());
+    	System.out.println("----------------------------------------------");
+    	
+    	Timer timer = new Timer();
+    	timer.schedule(new TimerTask() {
+			int i = 0;
+			@Override
+			public void run() {
+				System.out.println("定时器已启动" + (i + 1));
+			}
+		}, 0, 2000);
+    }
+
+    public void contextDestroyed(ServletContextEvent sce)  { 
+    	System.out.println("监听到 ServletContext 已经关闭");
+    	System.out.println("通过事件获取 ServletContext: " + sce.getServletContext());
+    	System.out.println("----------------------------------------------");
+    }
+	
+}

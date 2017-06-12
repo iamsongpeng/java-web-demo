@@ -1,0 +1,39 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import com.songpeng.domain.Area;
+import com.songpeng.utils.JDBCUtils;
+
+public class RegiestServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String pid = request.getParameter("pid");
+		// 根据 pid 查询数据库
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "select * from area where pid=?";
+		try {
+			List<Area> areaList = queryRunner.query(sql, new BeanListHandler<Area>(Area.class), pid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("数据查询失败!")
+		}
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
+}

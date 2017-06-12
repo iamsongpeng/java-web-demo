@@ -1,0 +1,8 @@
+<c3p0-config>
+  <default-config>
+    <property name="driverClass">com.mysql.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/java_web_demo_customer_add_dbutils</property>
+    <property name="user">root</property>
+    <property name="password">123</property>
+  </default-config>
+</c3p0-config>

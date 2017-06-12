@@ -1,0 +1,14 @@
+package com.songpeng.service.impl;
+
+import com.songpeng.domain.User;
+import com.songpeng.service.UserService;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public User login(User user) {
+		
+		return null;
+	}
+
+}

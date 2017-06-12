@@ -1,0 +1,15 @@
+package com.songpeng.demo02.service;
+
+public class AccountService {
+
+	public double actualConsumption(double txtPrice, double txtNum, String addRange) {
+		double totalPrices = 0.0d;
+		switch(addRange) {
+		case "0":
+			total
+			break;
+		}
+		return 0;
+	}
+
+}

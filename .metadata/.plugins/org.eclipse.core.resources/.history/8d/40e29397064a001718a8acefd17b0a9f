@@ -1,0 +1,16 @@
+package com.songpeng.service;
+
+import java.util.List;
+
+import com.songpeng.domain.Customer;
+
+/*
+ * 客户业务类
+ */
+public interface CustomerService {
+
+	// 添加用户
+	void saveCustomer(Customer customer);
+
+	List<Customer> findAllCustomers();
+}

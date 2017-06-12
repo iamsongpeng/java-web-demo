@@ -1,0 +1,67 @@
+package com.songpeng.domain;
+
+import com.sun.jmx.snmp.Timestamp;
+
+public class Resource {
+	private int id;
+	private String uuidname;
+	private String realname;
+	private String savepath;
+	private Timestamp uploadtime;
+	private String description;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUuidname() {
+		return uuidname;
+	}
+
+	public void setUuidname(String uuidname) {
+		this.uuidname = uuidname;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public String getSavepath() {
+		return savepath;
+	}
+
+	public void setSavepath(String savepath) {
+		this.savepath = savepath;
+	}
+
+	public Timestamp getuploadtime() {
+		return uploadtime;
+	}
+
+	public void setuploadtime(Timestamp uploadtime) {
+		this.uploadtime = uploadtime;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Resource [id=" + id + ", uuidname=" + uuidname + ", realname=" + realname + ", savepath=" + savepath
+				+ ", uploadtime=" + uploadtime + ", description=" + description + "]";
+	}
+
+}

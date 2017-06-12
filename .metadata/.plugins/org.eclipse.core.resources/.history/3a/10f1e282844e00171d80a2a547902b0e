@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+
+// 根据 id 获取标签对象
+function $(_id) {
+	return document.getElementById(_id);
+}
+
+// 获取 xmlhttprequest
+function getXmlHttpRequest() {
+	
+}

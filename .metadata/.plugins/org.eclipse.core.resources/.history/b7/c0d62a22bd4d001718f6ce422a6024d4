@@ -1,0 +1,36 @@
+package com.songpeng.utils;
+
+/**
+ * 文件上传工具类
+ * 
+ * @author seawind
+ */
+public class UploadUtils {
+	/**
+	 * 根据唯一文件名, 生成随机目录
+	 * 
+	 * @param uuidname
+	 * @return
+	 */
+	
+	public static String generateRandomDir(String uuidname) {
+		int hashcode = uuidname.hashCode();
+		// 一级目录
+		int d1 = hashcode & 0xf;
+		// 二级目录
+		int d2 = (hashcode >>> 4) & 0xf;
+		
+		return "/" + d1 + "/" + d2;
+	}
+	
+	/**
+	 * 根据真实文件名, 生成 uuidname
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	
+	public static String generateUUIDFilename(String filename) {
+		
+	}
+}

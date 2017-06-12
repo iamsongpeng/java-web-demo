@@ -1,0 +1,44 @@
+package com.songpeng.web;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+
+import com.songpeng.domain.Resource;
+import com.songpeng.utils.JDBCUtils;
+
+import sun.misc.BASE64Encoder;
+
+public class DownloadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1 获取资源编号
+		// 2 根据资源编号 获取资源信息
+		// 3 两头
+			// 获取浏览器的请求头
+			// 如果谷歌和获取 base64encode
+			// 否则 ie和其他
+		// 4 两流
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

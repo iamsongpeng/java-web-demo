@@ -1,0 +1,31 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.dbutils.QueryRunner;
+
+import com.songpeng.utils.JDBCUtils;
+
+public class DownloadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		// 根据 id 查询数据库
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		// 两头
+		response.getContentType(this.getServletContext().getMimeType());
+		// 两流
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

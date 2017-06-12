@@ -1,0 +1,14 @@
+package com.songpeng.factory;
+
+import com.songpeng.factory.ext.OperationAdd;
+
+public class OperationFactory {
+	public static Operation createOperate(String operate) {
+		Operation oper = null;
+		switch(operate) {
+		case "+":
+			oper = new OperationAdd();
+		}
+		return null;
+	}
+}

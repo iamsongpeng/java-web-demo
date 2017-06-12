@@ -1,0 +1,20 @@
+package com.songpeng.dao.impl;
+
+import org.apache.commons.dbutils.QueryRunner;
+
+import com.songpeng.dao.UserDao;
+import com.songpeng.domain.User;
+import com.songpeng.utils.JDBCUtils;
+
+public class UserDaoImpl implements UserDao {
+
+	@Override
+	public User findUserByUsernameAndPWD(User user) {
+		// 创建对象
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "select * from user where username=? and password=?";
+		
+		return null;
+	}
+
+}

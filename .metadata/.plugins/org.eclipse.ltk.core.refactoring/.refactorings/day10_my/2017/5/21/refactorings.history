@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;JDBCutils.java&apos; to &apos;day11_my/src/com.songpeng.utils&apos;&#x0D;&#x0A;- Original project: &apos;day10_my&apos;&#x0D;&#x0A;- Destination element: &apos;day11_my/src/com.songpeng.utils&apos;&#x0D;&#x0A;- Original element: &apos;com.songpeng.utils.JDBCutils.java&apos;" description="Copy compilation unit" destination="=day11_my/src&lt;com.songpeng.utils" element1="/src&lt;com.songpeng.utils{JDBCutils.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1495347107474" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,115 @@
+package com.songpeng.web;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.songpeng.domain.Resource;
+import com.songpeng.utils.JDBCUtils;
+import com.songpeng.utils.UploadUtils;
+
+public class UploadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 需求: 完成文件上传
+		// 1 如果不是文件上传表单, 抛出异常
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			throw new RuntimeException("不是文件上传表单, 请核实!");
+		}
+		// 6.1 声明一个资源类, 封装资源信息
+		Resource resource = new Resource();
+		
+		// 2 创建工厂
+		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+		
+		// 3 创建解析请求的核心类
+		ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
+		// 4 解析请求, 获取表单项集合
+		try {
+			List<FileItem> fileItems = fileUpload.parseRequest(request);
+			// 5 遍历集合
+			for(FileItem fileItem : fileItems) {
+				if(fileItem.isFormField()) {
+					// 5.1 如果表单项是普通表单项
+					// 5.1.1 获取 name 的属性值
+					String name = fileItem.getFieldName();
+					// 5.1.2 获取用户填写的值
+					String value = fileItem.getString("UTF-8");
+					
+					System.out.println("普通表单项: name 的属性值=" + name + ", 用户填写的值=" + value);
+					
+					// 6.2 将描述信息, 封装到资源类中
+					if("description".equals(name)) {
+						resource.setDescription(value);
+					}
+					
+				} else {
+					// 5.2 如果表单项是文件上传项
+					// 5.2.1 获取真实的文件名
+					String realname = fileItem.getName();
+					// 6.3 将真实的文件名, 封装到资源类中
+					resource.setRealname(realname);
+					// 5.2.2 根据真实文件名, 生成唯一的文件名
+					String uuidname = UploadUtils.generateUUIDFilename(realname);
+					// 6.4 将唯一的文件名封装到资源类中
+					resource.setUuidname(uuidname);
+					// 5.2.3 根据唯一文件名, 生成随机目录
+					String randomPath = UploadUtils.generateRandomDir(uuidname);
+					// 5.2.4 创建目录对象
+					File path = new File("d:/upload50" + randomPath);
+					// 6.5 将保存路径封装到资源类中
+					resource.setSavepath(path.getCanonicalPath());
+					path.mkdirs();
+					// 5.2.5 完成文件上传
+					File file = new File(path, uuidname);
+					try {
+						fileItem.write(file);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("上传失败!");
+					}
+				}
+			}
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+			throw new RuntimeException("解析请求出现异常!");
+		}
+		
+		// 6 将资源信息保存到数据库中
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "insert into resource values(null, ?, ?, ?, null, ?)";
+		Object[] args = {resource.getUuidname(), resource.getRealname(), resource.getSavepath(), resource.getDescription()};
+		try {
+			queryRunner.update(sql, args);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("将资源信息保存到数据库中出现异常!");
+		}
+		
+		// 7 提示上传成功, 跳转到 index.jsp
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println("上传成功, 3秒后跳转到首页!");
+		response.setHeader("refresh", "2; url=" + request.getContextPath() + "/index.jsp");
+		return;
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

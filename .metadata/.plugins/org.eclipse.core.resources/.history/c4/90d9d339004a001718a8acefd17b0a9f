@@ -1,0 +1,41 @@
+## 添加用户案例
+
+### 主要知识点
+
+1. 查询所有客户信息并显示
+2. 单行删除(在每行数据后, 添加删除按钮)
+3. 批量删除(在每行数据前 checkbox 复选框，勾选删除选中的记录)
+4. 修改(先查后改)
+
+
+### 分析
+
+* Dbutils 工具类
+* BeanUtils 工具类
+* layDate 开源的日期控件与时间插件
+
+### 代码
+
+MySQL 数据库准备
+
+```
+create database java_web_demo_customer_add_dbutils;
+
+use java_web_demo_customer_add_dbutils;
+
+create table customer(
+   id int primary key auto_increment,
+   name varchar(20),
+   sex varchar(10),
+   birthday date,
+   phone varchar(20),
+   email varchar(40),
+   hobby varchar(100),
+   type varchar(40),
+   description varchar(255)
+);
+```
+
+```
+
+```

@@ -1,0 +1,24 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+import javax.servlet.http.HttpServletRequest;
+
+public class OnlineCountServletRequestListener implements ServletRequestListener {
+	private int onlineCount = 0;
+    public OnlineCountServletRequestListener() {
+    }
+    
+    public void requestInitialized(ServletRequestEvent sre)  { 
+    	// 1 监听请求, 获得 request
+    	HttpServletRequest httpServletRequest = (HttpServletRequest) sre.getServletRequest();
+    	httpServletRequest.getSession().setAttribute("onlineCount", onlineCount+1);
+    	
+    }
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+    }
+
+	
+}

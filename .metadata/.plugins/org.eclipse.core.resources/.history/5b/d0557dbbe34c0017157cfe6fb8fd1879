@@ -1,0 +1,19 @@
+package com.songpeng.web.listener;
+
+import java.util.Date;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class MyServletRequestListener implements ServletRequestListener {
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+    	System.out.println("监听到 HttpSessionEvent 已经创建" + new Date().toLocaleString());
+    	System.out.println("通过事件获取 HttpSessionEvent: " + sre.getSession());
+    	System.out.println("----------------------------------------------");
+    }
+
+    public void requestInitialized(ServletRequestEvent sre)  { 
+    }
+	
+}

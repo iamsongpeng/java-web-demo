@@ -1,0 +1,31 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.songpeng.service.CustomerService;
+import com.songpeng.service.impl.CustomerServiceImpl;
+
+public class DelCustomerServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. 获取用户编号
+		String id = request.getParameter("id");
+		// 2. 将用户编号传给业务层, 根据编号删除客户
+		CustomerService customerService = new CustomerServiceImpl();
+		customerService.delCustomerById(id);
+		
+		// 3. 提示删除成功, 重新查询所有的用户信息并显示
+		response.setContentType("text/html; charset=UTF-8");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 注意1: 表单必须是 post 方式 -->
+<!-- 注意2: form 标签上增加 enctype="multiport/form-data" -->
+<!-- 注意3: 表单项必须有 name 属性 -->
+<form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }">
+	文件描述: <input type="text" name="description" /><br/>
+	上传文件: <input type="file" name="upload" /><br/>
+	<input type="submit" value="提交" />
+</form>
+</body>
+</html>

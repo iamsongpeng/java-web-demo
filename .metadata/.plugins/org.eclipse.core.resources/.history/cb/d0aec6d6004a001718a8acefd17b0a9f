@@ -1,0 +1,66 @@
+package com.songpeng.web;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.DateConverter;
+
+import com.songpeng.domain.Customer;
+import com.songpeng.service.CustomerService;
+import com.songpeng.service.impl.CustomerServiceImpl;
+
+public class CustomerAddServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		// 1 获取参数, 封装到 JavaBean 中
+		Customer customer = new Customer();
+		// 1.1 问题: BeanUtils 不支持将字符串转成 java.util.Date
+		// 解决方案: 手动解决, 注册
+		DateConverter dateConverter = new DateConverter();
+		dateConverter.setPattern("yyyy-MM-dd"); // 客户端填写表单的生日字符串格式
+		ConvertUtils.register(dateConverter, java.util.Date.class);
+		try {
+			BeanUtils.populate(customer, request.getParameterMap());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 1.2 问题: BeanUtils 不支持多选
+		// 解决方案: 手动解决
+		String[] args = request.getParameterValues("hobby");
+		if(args != null) {
+			String hobbyArr2Str = Arrays.toString(args);
+			//System.out.println(hobbyArr2Str);
+			// 截取: 去掉字符串两边的中括号, 并将结果保存到 hobby 成员变量中
+			customer.setHobby(hobbyArr2Str.substring(1, hobbyArr2Str.length()-1));
+		}
+		
+		//System.out.println(customer);
+		// 2 将 JavaBean 传给业务层完成添加客户业务
+		CustomerService customerService = new CustomerServiceImpl();
+		// 推荐阅读 阿里巴巴-Java开发手册
+		// Service/DAO 层命名规范: (4) 插入的方法用 save(推荐 )或 insert 做前缀
+		customerService.saveCustomer(customer); 
+		
+		// 3 提示: 添加成功, 3秒后跳转到首页
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println("添加成功, 3秒后跳转到首页!");
+		response.setHeader("refresh", "3; url=" + request.getContextPath() + "/index.jsp"); 
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

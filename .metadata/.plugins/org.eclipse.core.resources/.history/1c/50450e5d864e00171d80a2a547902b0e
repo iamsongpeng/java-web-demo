@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>省市县三级联动</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/comm/comm.js"></script>
+	
+<script type="text/javascript">
+	window.onload = function() {
+		// 省
+		loadarea(0, "pro");
+		
+		// 市
+		$("pro").onchange = function() {
+			$("city").length = 1;
+			$("county").length = 1;
+			loadarea(this.value, "city");
+		}
+		
+		// 区县
+		$("city").onchange = function() {
+			$("county").length = 1;
+			loadarea(this.value, "county");
+		}
+	}
+</script>
+</head>
+<body>
+	<select id="pro" name="pro">
+		<option value="pro">---请选择省---</option>
+	</select>
+	<select id="city" name="city">
+		<option value="city">---请选择市---</option>
+	</select>
+	<select id="county" name="county">
+		<option value="county">---请选择县---</option>
+	</select>
+</body>
+</html>

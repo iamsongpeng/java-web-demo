@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>登录表单</h2>
+<form action="http://localhost:8080/java-web-demo-login-02/login" method="POST">
+	<table>
+		<tr>
+			<td>用户名</td>
+			<td><input type="text" name="username" /></td>
+		</tr>
+		<tr>
+			<td>密码</td>
+			<td><input type="password" name="password" /></td>
+		</tr>
+		<tr>
+			<td>验证码</td>
+			<td>
+				<input type="text" name="auth-code" />
+				<img id="auto-code-img" src="/java-web-demo-login-02/checkauthcode" onclick="changeAuthCode()" />
+				<a href="javascript:void(0)" onclick="changeAuthCode()">看不清, 换一张</a>				
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" value="登录" /></td>
+		</tr>
+	</table>
+</form>
+<script>
+	function changeAuthCode() {
+		document.getElementById("auto-code-img").src = "/java-web-demo-login-02/checkauthcode?r=" + Math.random();
+	}
+	
+</script>
+</body>
+</html>

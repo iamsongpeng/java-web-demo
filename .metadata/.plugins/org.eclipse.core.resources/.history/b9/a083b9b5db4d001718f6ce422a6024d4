@@ -1,0 +1,68 @@
+package com.songpeng.web;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+
+import com.songpeng.domain.Resource;
+import com.songpeng.utils.JDBCUtils;
+
+import sun.misc.BASE64Encoder;
+
+public class DownloadServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		// 根据 id 查询数据库
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "select * from resource where id=?";
+		try {
+			Resource resource = queryRunner.query(sql, new BeanHandler<Resource>(Resource.class));
+			String realname = resource.getRealname();
+			
+			// 两头
+			response.setContentType(this.getServletContext().getMimeType(realname));
+			// 解决文件名中文乱码
+			String userAgent = request.getHeader("user-agent");
+			if (userAgent.contains("Chrome") || userAgent.contains("Firefox")) {
+				// 如果谷歌和获取 base64encode
+				BASE64Encoder base64Encoder = new BASE64Encoder();
+				realname = "=?utf-8?B?" + base64Encoder.encode(realname.getBytes("utf-8")) + "?=";
+			} else {
+				// 否则 ie和其他
+				realname = URLEncoder.encode(realname, "utf-8");
+				realname = realname.replace("+", " ");
+			}
+			response.setHeader("content-disposition", "attachment;filename=" + realname);
+			
+			// 两流
+			File file = new File(resource.getSavepath(), resource.getRealname());
+			InputStream in = new BufferedInputStream(new FileInputStream(file));
+			OutputStream out = new BufferedOutputStream(response.getOutputStream());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

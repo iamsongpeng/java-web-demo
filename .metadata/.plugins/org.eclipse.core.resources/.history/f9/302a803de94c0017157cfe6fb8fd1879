@@ -1,0 +1,16 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class ServletContextListener implements javax.servlet.ServletContextListener {
+
+    public void contextInitialized(ServletContextEvent sce)  { 
+    	// 项目启动后只执行一次
+    	sce.getServletContext().setAttribute("onlineCount", 0);
+    }
+
+    public void contextDestroyed(ServletContextEvent sce)  { 
+    }
+	
+}

@@ -1,0 +1,14 @@
+package com.songpeng.dao.impl;
+
+import com.songpeng.dao.UserDao;
+import com.songpeng.domain.User;
+
+public class UserDaoImpl implements UserDao {
+
+	@Override
+	public User findUserByUsernameAndPWD(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

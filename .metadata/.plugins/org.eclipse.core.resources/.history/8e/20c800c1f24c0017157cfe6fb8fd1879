@@ -1,0 +1,42 @@
+package com.songpeng.domain;
+
+import java.io.Serializable;
+
+import javax.servlet.http.HttpSessionActivationListener;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+import javax.servlet.http.HttpSessionEvent;
+
+public class User implements HttpSessionBindingListener, Serializable, HttpSessionActivationListener {
+	private String info;
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		System.out.println("valueBound ， 当对象被加入session 就会执行");
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		System.out.println("valueUnbound， 当对象从Session 移除时 就会执行");
+	}
+	
+	@Override
+	public void sessionWillPassivate(HttpSessionEvent se) {
+		System.out.println("数据被钝化!");
+	}
+
+	@Override
+	public void sessionDidActivate(HttpSessionEvent se) {
+		System.out.println("数据被活化!");
+	}
+
+
+}

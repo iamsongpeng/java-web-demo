@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function delItem() {
+	
+}
+// 页面加载完成后执行
+window.onload = function() {
+	var addAttachment = document.getElementById("addAttachment");
+	var uploaddiv = document.getElementById("uploaddiv");
+	// 给添加附件按钮绑定单击事件
+	addAttachment.onclick = function() {
+		// 1 创建 div 标签, <div></div>
+		var _div = document.createElement("div");
+		// 3 创建 input 标签 <input/>
+		var _input = document.createElement("input");
+		// 3.1 给 input 标签增加 type 属性 type="file"
+		_input.setAttribute("type", "file")
+		// 3.2 给 input 标签增加 name 属性 
+		_input.setAttribute("name", "upload");
+		// 4 将新增的 input 标签追加到新增的 div 标签中
+		_div.appendChild(_input);
+		// 5 创建 a 标签
+		var _a = document.createElement("a");
+		// 5.1 给 a 标签增加内容
+		_a.innerHTML = "删除";
+		// 5.2 给标签增加 href 属性
+		_a.setAttribute("href", "javascript: void(0)");
+		// 5.3 给 a 标签增加 onclick 属性
+		_a.setAttribute("onclick","delItem(this)");
+		// 6 将 a 标签追加到新增的 div 中
+		_div.appendChild(_a);
+		// 2 将新增的 div 标签, 追加到 id = uploaddiv;
+		uploaddiv.appendChild(_div);
+	}
+}
+</script>
+</head>
+<body>
+<form method="post" enctype="multipart-data" action="${pageContext.request.contextPath }/unload2">
+	<input type="button" id="addAttachment" value="添加附件">
+	<div id="uploaddiv">
+	</div>
+	<input type="submit" value="上传文件" >	
+</form>
+</body>
+</html>

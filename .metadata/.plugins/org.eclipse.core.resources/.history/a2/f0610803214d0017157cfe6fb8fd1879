@@ -1,0 +1,19 @@
+package com.songpeng.factory.ext;
+
+import com.songpeng.factory.Operation;
+/*
+ * 除法类, 
+ * 继承运算类
+ */
+public class OperationDiv extends Operation {
+
+	@Override
+	public double getResult() throws Exception {
+		double result = 0;
+		if(super.get_numberA() == 0) {
+			throw new Exception("除数不能为0!");
+		}
+		return 0;
+	}
+
+}

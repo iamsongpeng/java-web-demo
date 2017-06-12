@@ -1,0 +1,15 @@
+package com.songpeng.test;
+
+import com.songpeng.factory.Operation;
+import com.songpeng.factory.OperationFactory;
+
+public class Test01 {
+	public static void main(String[] args) {
+		Operation oper;
+		oper = OperationFactory.createOperate("+");
+		oper.set_numberA(1);
+		oper.set_numberB(2);
+		double result = oper.getResult();
+		System.out.println(result);
+	}
+}

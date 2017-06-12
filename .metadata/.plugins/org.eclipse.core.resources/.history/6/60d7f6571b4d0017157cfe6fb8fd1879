@@ -1,0 +1,33 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 需求: 遍历指定目录, 对外提供下载 -->
+<%
+	// 1 使用 LinkedList 模拟队列(先进先出)
+	LinkedList<File> queue = new LinkedList<File>();
+	// 2 指定根目录
+	File rootPath = new File("D:\\迅雷下载");
+	// 3 将根目录放到队列中
+	queue.addLast(rootPath);
+	// 4 遍历队列
+	while(!queue.isEmpty()) {
+		// 4.1 从队列中取出目录抽象, 注意是取出, 不是复制
+		File path = queue.removeFirst();
+		// 4.2 获取目录下所有的子目录和子文件的数组
+		File[] pathArr = path.listFiles();
+		if(pathArr != null) {
+			
+		}
+	}
+%>
+
+</body>
+</html>

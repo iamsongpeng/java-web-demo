@@ -1,0 +1,9 @@
+package com.songpeng.factory;
+
+public class OperationFactory {
+	public static Operation createOperate(String operate) {
+		Operation oper = null;
+		
+		return null;
+	}
+}

@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 判断容器(session)中是否有 existUser -->
+	<c:if test="${empty existUser }">
+		<!-- 如果没有的话 -->
+		未登录, 请您<a href="${pageContext.request.contextPath }/demo02/login.jsp">登录</a>
+	</c:if>
+	<c:if test="${not empty existUser }">
+		欢迎来到首页, 您已登录! <a href="${pageContext.request.contextPath }/demo02/invalidate.jsp">注销</a>
+	</c:if>
+</body>
+</html>

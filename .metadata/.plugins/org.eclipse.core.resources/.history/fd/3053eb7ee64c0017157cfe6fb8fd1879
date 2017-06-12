@@ -1,0 +1,20 @@
+package com.songpeng.web.listener;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class OnlineCountServletRequestListener implements ServletRequestListener {
+
+    public OnlineCountServletRequestListener() {
+    }
+    
+    public void requestInitialized(ServletRequestEvent sre)  { 
+    	// 1 监听请求, 获得 request
+    	sre.getServletRequest()
+    }
+
+    public void requestDestroyed(ServletRequestEvent sre)  { 
+    }
+
+	
+}

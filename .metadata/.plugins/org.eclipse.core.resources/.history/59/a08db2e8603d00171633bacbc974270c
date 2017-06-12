@@ -1,0 +1,72 @@
+package com.songpeng.demo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Savepoint;
+
+import org.junit.Test;
+
+import com.songpeng.utils.JDBCutils;
+
+public class Demo04 {
+	//练习
+	//需求：向数据库中插入10000 条数据， 每隔500条设置一个回滚点。9876 制造异常，数据库保存多少条记录
+	// 1 向数据库中插入10000 条数据
+	// 2 每隔500条设置一个回滚点
+	// 3 9876 制造异常，
+	@Test
+	public void test01() {
+		//搭框架
+		//练习事务
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		//声明一个回滚点
+		Savepoint savepoint = null;
+		try {
+			//获取连接
+			conn = JDBCutils.getConnection();
+			//开启事务
+			conn.setAutoCommit(false);
+			//创建回滚点
+			savepoint = conn.setSavepoint();
+			//创建执行sql语句对象
+			String sql = "insert into student values(null, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			//执行sql语句，并获得结果
+			for (int i = 1; i < 10000; i++) {
+				//设置sql参数
+				pstmt.setString(1, "高达" + i + "号");
+				pstmt.setInt(2, 100);
+				//执行修改
+				pstmt.executeUpdate();
+				
+				
+				//每五百条数据设置回滚点
+				if(i % 500 == 0) {
+					savepoint = conn.setSavepoint();
+					//conn.commit();
+				}
+				//制造异常
+				if(i == 9876) {
+					int except = 1/0;
+				}
+			}
+			//提交事务
+			conn.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			if(savepoint != null) {
+				try {
+					conn.rollback();
+					conn.commit();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			//释放资源
+			JDBCutils.replease(pstmt, conn);
+		}
+	}
+}
